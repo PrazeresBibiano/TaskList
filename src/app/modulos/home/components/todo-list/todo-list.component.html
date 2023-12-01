@@ -1,0 +1,15 @@
+<section [ngClass]="{loading: !tarefas.length}">
+    <ul *ngIf="tarefas.length">
+        <li *ngFor="let tarefa of tarefas; let i = index">
+            <input type="checkbox" [(ngModel)]="tarefa.checked">
+            <input type="text" [(ngModel)]="tarefa.listaTarefas" [ngClass]="{checked:tarefa.checked}"
+            (ngModelChange)="eliminarTarefaVazia(tarefa.listaTarefas, i)">
+           <button (click)="eliminarElemento(i)">
+                <img src="assets/icons/icon-trash.svg" >
+           </button>
+            
+        </li>
+    </ul>
+</section>
+<app-todo-input-add-itens (emitirEvento)="setEvent($event)"></app-todo-input-add-itens>
+<app-todo-button-delete-all *ngIf="tarefas.length" (click)="eliminarTudo()"></app-todo-button-delete-all>
